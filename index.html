@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+    <style>
+        .img-box {
+            width: 100%;
+            height: 800px;
+            background: url('img/a_2.jpg');
+            background-size: contain;
+            position: absolute;
+        }
+
+        #time_box {
+            display: flex;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 900;
+            font-family: 微软雅黑;
+        }
+
+        .hs_time_box {
+            color: #19c419;
+            font-family: 微软雅黑;
+            margin-left: -1px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "microsoft yahei", "宋体";
+            color: #333;
+            font-size: 16px;
+            background-position: 0px 170px
+        }
+
+        span {
+            list-style: none;
+        }
+
+        input, button, img {
+            outline: none;
+            border: none;
+        }
+
+        .llbr_01 {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        ul span {
+            color: #e3964a;
+            font-size: 17px;
+            font-family: 微软雅黑;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="img-box">
+    <div>
+        <div style="margin-top: 39%;display: flex;justify-content: flex-end">
+            <div class="llbr_01">
+                <div id="marquee1" style="width:468px;height: 38px;float: left;overflow: hidden;">
+                    <div style="width:8000px;height: 38px; background:none;margin-left: 0;">
+                        <ul id="marquee1_1" style="float:left;">
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                新和风
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                险报备。
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                若您
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                有14</span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                天中高
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                风险地
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                区旅居
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                史(含
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                境外)
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                请及时
+                            </span>
+                            <span style="float: left;  text-align: center; height: 38px;margin-top: 0;">
+                                信息更
+                            </span>
+
+
+                        </ul>
+                        <ul id="marquee1_2" style="float:left;">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 4%;">
+            <span id="time_box"></span>
+        </div>
+        <div style="margin-top: 90.5%;display: flex;justify-content: space-between">
+            <div align="center" style="width: 40%;display: flex;justify-content: space-between">
+                <div>
+                </div>
+                <div class="hs_time_box">
+                    <div>2022</div>
+                    <div style="margin-top: -7px" id="hs_time"></div>
+                </div>
+            </div>
+            <div></div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //当前时间
+    const time_box = document.getElementById('time_box');
+
+    //核酸时间
+    const hs_time = document.getElementById('hs_time');
+
+    /**
+     * 获取时间
+     */
+    function getTime() {
+        let date = new Date();
+        time_box.innerText = formatTime(date.getMonth() + 1) + '-' + formatTime(date.getDate()) +
+            '  ' + formatTime(date.getHours()) + ':' + formatTime(date.getMinutes()) + ':'
+            + formatTime(date.getSeconds());
+
+        hs_time.innerText = formatTime(date.getMonth() + 1) + '-' + formatTime(date.getDate() === 1 ? date.getDate() : date.getDate() - 1);
+    }
+
+    /**
+     * 时间格式当长度不够用0补齐
+     * @param val
+     * @returns {string|*}
+     */
+    function formatTime(val) {
+        if (val.toString().length === 1) {
+            return '0' + val;
+        }
+        return val;
+    }
+
+    /**
+     * 实时刷新时间
+     */
+    setInterval(function () {
+        getTime();
+    }, 1000);
+
+    /**
+     * js无缝滚动代码
+     * @param i
+     * @param direction
+     */
+    function marquee(i, direction) {
+        var obj = document.getElementById("marquee" + i);
+        var obj1 = document.getElementById("marquee" + i + "_1");
+        var obj2 = document.getElementById("marquee" + i + "_2");
+        if (direction === "up") {
+            if (obj2.offsetTop - obj.scrollTop <= 0) {
+                obj.scrollTop -= (obj1.offsetHeight + 20);
+            } else {
+                var tmp = obj.scrollTop;
+                obj.scrollTop++;
+                if (obj.scrollTop === tmp) {
+                    obj.scrollTop = 1;
+                }
+            }
+        } else {
+            if (obj2.offsetWidth - obj.scrollLeft <= 0) {
+                obj.scrollLeft -= obj1.offsetWidth;
+            } else {
+                obj.scrollLeft++;
+            }
+        }
+    }
+
+    function marqueeStart(i, direction) {
+        var obj = document.getElementById("marquee" + i);
+        var obj1 = document.getElementById("marquee" + i + "_1");
+        var obj2 = document.getElementById("marquee" + i + "_2");
+
+        obj2.innerHTML = obj1.innerHTML;
+        var marqueeVar = window.setInterval("marquee(" + i + ", '" + direction + "')", 30);
+        obj.onmouseover = function () {
+            window.clearInterval(marqueeVar);
+        }
+        obj.onmouseout = function () {
+            marqueeVar = window.setInterval("marquee(" + i + ", '" + direction + "')", 30);
+        }
+    }
+
+    marqueeStart(1, "left");
+</script>
+
+</body>
+
+</html>
